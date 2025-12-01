@@ -137,7 +137,11 @@ export default function Reveal() {
               marginTop: '32px', 
               color: 'var(--text-secondary)',
               fontSize: '1rem',
-              fontWeight: '500'
+              fontWeight: '500',
+              padding: '16px 24px',
+              background: 'var(--md-surface-variant)',
+              borderRadius: '12px',
+              border: '1px solid rgba(255, 255, 255, 0.12)'
             }}>
               ⚠️ You do NOT know the secret word. Try to blend in!
             </p>
@@ -161,7 +165,7 @@ export default function Reveal() {
         </button>
 
         {isHostUser && (
-          <div style={{ marginTop: '40px', paddingTop: '32px', borderTop: '2px solid rgba(139, 92, 246, 0.3)' }}>
+          <div style={{ marginTop: '40px', paddingTop: '32px', borderTop: '1px solid rgba(255, 255, 255, 0.12)' }}>
             <p className="waiting-message">
               Once all players have confirmed, you can start voting.
             </p>

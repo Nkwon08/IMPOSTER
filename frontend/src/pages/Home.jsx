@@ -94,7 +94,7 @@ export default function Home() {
   return (
     <div className="container">
       <h1>IMPOSTER</h1>
-      <p style={{ textAlign: 'center', color: '#6b7280', marginBottom: '40px', fontSize: '1.1rem', fontWeight: '400' }}>
+      <p style={{ textAlign: 'center', color: 'var(--text-secondary)', marginBottom: '40px', fontSize: '1.1rem', fontWeight: '400' }}>
       </p>
 
       <div>
@@ -158,8 +158,8 @@ export default function Home() {
           onClick={() => setShowRules(true)}
           className="button"
           style={{
-            background: 'transparent',
-            border: '1px solid rgba(139, 92, 246, 0.3)',
+            background: 'var(--md-surface-variant)',
+            border: '1px solid rgba(255, 255, 255, 0.12)',
             color: 'var(--text-secondary)',
             boxShadow: 'none',
             fontSize: '0.9rem',
