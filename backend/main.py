@@ -21,7 +21,13 @@ allowed_origins = [
 # Add frontend URL from environment variable if set
 frontend_url = os.getenv("FRONTEND_URL")
 if frontend_url:
+    # Remove trailing slash if present
+    frontend_url = frontend_url.rstrip('/')
     allowed_origins.append(frontend_url)
+    print(f"CORS: Added frontend URL: {frontend_url}")
+
+# Log allowed origins for debugging
+print(f"CORS: Allowed origins: {allowed_origins}")
 
 app.add_middleware(
     CORSMiddleware,
