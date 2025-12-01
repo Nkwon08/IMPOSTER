@@ -36,10 +36,11 @@ export default function Home() {
       if (res.ok) {
         navigate(`/lobby?roomCode=${data.roomCode}&hostId=${data.hostId}&playerName=${encodeURIComponent(playerName)}&playerId=${data.hostId}`)
       } else {
-        alert('Failed to create game: ' + (data.detail || data.error))
+        alert('Failed to create game: ' + (data.detail || data.error || JSON.stringify(data)))
       }
     } catch (error) {
-      alert('Error creating game')
+      console.error('Error creating game:', error)
+      alert('Error creating game: ' + error.message + '. Check console for details.')
     } finally {
       setIsCreating(false)
     }
