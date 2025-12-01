@@ -1,0 +1,50 @@
+# Dependencies
+node_modules/
+venv/
+env/
+.venv/
+
+# Build outputs
+dist/
+build/
+*.pyc
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Environment variables
+.env
+.env.local
+.env*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Next.js (if any)
+.next/
+out/
+
+# Python
+*.egg-info/
+dist/
+build/
+
+# Vite
+.vite/
+
