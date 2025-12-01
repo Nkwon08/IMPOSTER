@@ -113,10 +113,10 @@ class Player(BaseModel):
 
 
 class Room:
-    def __init__(self, room_code: str, host_id: str):
+    def __init__(self, room_code: str, host_id: str, host_name: str = "Host"):
         self.room_code = room_code
         self.host_id = host_id
-        self.players: List[Player] = [Player(id=host_id, name="Host")]
+        self.players: List[Player] = [Player(id=host_id, name=host_name)]
         self.status = "waiting"  # waiting, reveal, voting, results
         self.category: Optional[str] = None
         self.num_imposters: Optional[int] = None
@@ -168,12 +168,17 @@ async def broadcast_to_room(room_code: str, message: dict):
 
 
 @app.post("/api/create_room")
-async def create_room():
+async def create_room(data: dict = None):
     """Create a new game room"""
     room_code = generate_room_code()
     host_id = f"host_{datetime.now().timestamp()}_{random.random()}"
     
-    room = Room(room_code, host_id)
+    # Get host name from request body, default to "Host" if not provided
+    host_name = "Host"
+    if data and data.get("playerName"):
+        host_name = data.get("playerName")
+    
+    room = Room(room_code, host_id, host_name)
     rooms[room_code] = room
     
     return {

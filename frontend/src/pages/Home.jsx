@@ -32,7 +32,7 @@ export default function Home() {
       const res = await fetch(apiUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({}),
+        body: JSON.stringify({ playerName: playerName.trim() }),
       })
 
       if (!res.ok) {
