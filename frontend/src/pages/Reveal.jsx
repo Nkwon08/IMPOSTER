@@ -112,6 +112,10 @@ export default function Reveal() {
                 src="/imposter.gif" 
                 alt="Imposter" 
                 className="imposter-gif"
+                onError={(e) => {
+                  // Hide the image if GIF doesn't exist
+                  e.target.style.display = 'none'
+                }}
               />
             </div>
             <div className="category-display">📂 {category}</div>
