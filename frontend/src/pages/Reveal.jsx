@@ -109,7 +109,7 @@ export default function Reveal() {
             <div className="imposter-display">🎭 IMPOSTER</div>
             <div className="imposter-gif-container">
               <img 
-                src="/imposter.gif" 
+                src="/imposterdog.gif" 
                 alt="Imposter" 
                 className="imposter-gif"
                 onError={(e) => {
