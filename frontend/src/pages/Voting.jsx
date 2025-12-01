@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { useWebSocket } from '../hooks/useWebSocket'
+import { getApiUrl } from '../utils/config'
 
 export default function Voting() {
   const navigate = useNavigate()
@@ -22,7 +23,7 @@ export default function Voting() {
 
   const fetchRoomState = async () => {
     try {
-      const res = await fetch(`/api/get_room_state?roomCode=${roomCode}`)
+      const res = await fetch(getApiUrl(`/api/get_room_state?roomCode=${roomCode}`))
       const data = await res.json()
       if (res.ok) {
         const otherPlayers = (data.players || []).filter((p) => p.id !== playerId)
@@ -53,7 +54,7 @@ export default function Voting() {
 
     setIsSubmitting(true)
     try {
-      const res = await fetch('/api/submit_vote', {
+      const res = await fetch(getApiUrl('/api/submit_vote'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

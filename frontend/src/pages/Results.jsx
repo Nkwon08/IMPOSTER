@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
+import { getApiUrl } from '../utils/config'
 
 export default function Results() {
   const navigate = useNavigate()
@@ -17,7 +18,7 @@ export default function Results() {
 
   const fetchResults = async () => {
     try {
-      const res = await fetch(`/api/get_room_state?roomCode=${roomCode}`)
+      const res = await fetch(getApiUrl(`/api/get_room_state?roomCode=${roomCode}`))
       const data = await res.json()
       if (res.ok) {
         setRoomState(data)

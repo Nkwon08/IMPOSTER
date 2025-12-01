@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { useWebSocket } from '../hooks/useWebSocket'
+import { getApiUrl } from '../utils/config'
 
 export default function Reveal() {
   const navigate = useNavigate()
@@ -24,7 +25,7 @@ export default function Reveal() {
 
   const fetchPlayerInfo = async () => {
     try {
-      const res = await fetch(`/api/get_player_info?roomCode=${roomCode}&playerId=${playerId}`)
+      const res = await fetch(getApiUrl(`/api/get_player_info?roomCode=${roomCode}&playerId=${playerId}`))
       const data = await res.json()
       if (res.ok) {
         setRole(data.role)
@@ -61,7 +62,7 @@ export default function Reveal() {
 
     setIsMarkingRevealed(true)
     try {
-      const res = await fetch('/api/mark_revealed', {
+      const res = await fetch(getApiUrl('/api/mark_revealed'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -83,7 +84,7 @@ export default function Reveal() {
     if (!roomCode || !hostId) return
 
     try {
-      const res = await fetch('/api/start_voting', {
+      const res = await fetch(getApiUrl('/api/start_voting'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

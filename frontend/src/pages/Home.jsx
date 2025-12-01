@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
+import { getApiUrl } from '../utils/config'
 
 export default function Home() {
   const navigate = useNavigate()
@@ -25,7 +26,7 @@ export default function Home() {
 
     setIsCreating(true)
     try {
-      const res = await fetch('/api/create_room', {
+      const res = await fetch(getApiUrl('/api/create_room'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({}),
@@ -52,7 +53,7 @@ export default function Home() {
 
     setIsJoining(true)
     try {
-      const res = await fetch('/api/join_room', {
+      const res = await fetch(getApiUrl('/api/join_room'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

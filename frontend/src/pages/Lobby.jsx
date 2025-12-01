@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { useWebSocket } from '../hooks/useWebSocket'
+import { getApiUrl } from '../utils/config'
 
 const CATEGORIES = ['Animals', 'Foods', 'Celebrities', 'Countries', 'TV Shows']
 const IMPOSTER_COUNTS = [1, 2, 3]
@@ -33,7 +34,7 @@ export default function Lobby() {
   const fetchRoomState = async () => {
     if (!roomCode) return
     try {
-      const res = await fetch(`/api/get_room_state?roomCode=${roomCode}`)
+      const res = await fetch(getApiUrl(`/api/get_room_state?roomCode=${roomCode}`))
       const data = await res.json()
       if (res.ok) {
         setPlayers(data.players || [])
@@ -66,7 +67,7 @@ export default function Lobby() {
 
     setIsStarting(true)
     try {
-      const res = await fetch('/api/start_game', {
+      const res = await fetch(getApiUrl('/api/start_game'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
