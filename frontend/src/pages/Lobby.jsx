@@ -3,7 +3,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom'
 import { useWebSocket } from '../hooks/useWebSocket'
 import { getApiUrl } from '../utils/config'
 
-const CATEGORIES = ['Animals', 'Foods', 'Celebrities', 'Countries', 'TV Shows']
+const CATEGORIES = ['Animals', 'Foods', 'Celebrities', 'Countries', 'TV Shows', 'Locations', 'Objects']
 const IMPOSTER_COUNTS = [1, 2, 3]
 
 export default function Lobby() {
