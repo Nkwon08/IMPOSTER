@@ -29,23 +29,25 @@ export default function Toast({ message, type = 'info', onClose, duration = 3000
 
   return (
     <div
+      className="toast"
       style={{
         position: 'fixed',
-        top: '20px',
+        bottom: '20px',
         right: '20px',
         background: style.background,
         color: 'white',
         padding: '16px 24px',
         borderRadius: '12px',
-        boxShadow: '0 8px 24px rgba(0, 0, 0, 0.3)',
+        boxShadow: '0 8px 24px rgba(0, 0, 0, 0.5)',
         zIndex: 10000,
-        animation: 'fadeIn 0.3s ease-out',
+        animation: duration > 0 ? 'toastSlideIn 0.3s cubic-bezier(0.4, 0, 0.2, 1)' : 'toastFadeOut 0.3s ease-out',
         display: 'flex',
         alignItems: 'center',
         gap: '12px',
         minWidth: '250px',
         maxWidth: '400px',
         cursor: 'pointer',
+        transformStyle: 'preserve-3d',
       }}
       onClick={onClose}
     >

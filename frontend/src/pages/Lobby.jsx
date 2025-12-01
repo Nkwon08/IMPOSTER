@@ -157,7 +157,7 @@ export default function Lobby() {
           <button
             onClick={handleStartGame}
             disabled={isStarting || players.length < 3}
-            className="button"
+            className="button important"
             style={{ marginTop: '24px' }}
           >
             {isStarting ? (

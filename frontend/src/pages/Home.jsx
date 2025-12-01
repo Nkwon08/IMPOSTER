@@ -112,7 +112,7 @@ export default function Home() {
         <button
           onClick={handleCreateGame}
           disabled={isCreating || isJoining}
-          className="button"
+          className="button important"
         >
           {isCreating ? (
             <>
@@ -140,7 +140,7 @@ export default function Home() {
         <button
           onClick={handleJoinGame}
           disabled={isCreating || isJoining}
-          className="button"
+          className="button important"
         >
           {isJoining ? (
             <>
