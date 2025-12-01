@@ -48,11 +48,54 @@ async def root():
 
 # Word lists by category
 WORD_LISTS = {
-    "Animals": ["Elephant", "Giraffe", "Penguin", "Dolphin", "Tiger", "Lion", "Bear", "Monkey", "Zebra", "Kangaroo"],
-    "Foods": ["Pizza", "Burger", "Sushi", "Taco", "Pasta", "Ice Cream", "Sandwich", "Salad", "Soup", "Steak"],
-    "Celebrities": ["Taylor Swift", "Tom Hanks", "Beyonce", "Leonardo DiCaprio", "Oprah", "Dwayne Johnson", "Emma Watson", "Chris Evans", "Ariana Grande", "Ryan Reynolds"],
-    "Countries": ["Japan", "France", "Brazil", "Canada", "Australia", "Italy", "Spain", "Germany", "India", "Mexico"],
-    "TV Shows": ["Friends", "Game of Thrones", "Breaking Bad", "The Office", "Stranger Things", "The Crown", "The Simpsons", "The Walking Dead", "Lost", "House of Cards"],
+    "Animals": [
+        "Elephant", "Giraffe", "Penguin", "Dolphin", "Tiger",
+        "Lion", "Bear", "Monkey", "Zebra", "Kangaroo",
+        "Panda", "Cheetah", "Hippo", "Rhinoceros", "Fox",
+        "Wolf", "Eagle", "Shark", "Octopus", "Koala"
+    ],
+
+    "Foods": [
+        "Pizza", "Burger", "Sushi", "Taco", "Pasta",
+        "Ice Cream", "Sandwich", "Salad", "Soup", "Steak",
+        "Ramen", "Fried Chicken", "Doughnut", "Bagel", "Nachos",
+        "Hot Dog", "Burrito", "Curry", "Pancakes", "Smoothie"
+    ],
+
+    "Celebrities": [
+        "Taylor Swift", "Tom Hanks", "Beyonce", "Leonardo DiCaprio", "Oprah",
+        "Dwayne Johnson", "Emma Watson", "Chris Evans", "Ariana Grande", "Ryan Reynolds",
+        "Selena Gomez", "Will Smith", "Zendaya", "Morgan Freeman", "Kim Kardashian",
+        "Bruno Mars", "Billie Eilish", "Keanu Reeves", "Jennifer Lawrence", "Drake"
+    ],
+
+    "Countries": [
+        "Japan", "France", "Brazil", "Canada", "Australia",
+        "Italy", "Spain", "Germany", "India", "Mexico",
+        "China", "South Korea", "United Kingdom", "Egypt", "Argentina",
+        "South Africa", "Russia", "Thailand", "Sweden", "Turkey"
+    ],
+
+    "TV Shows": [
+        "Friends", "Game of Thrones", "Breaking Bad", "The Office", "Stranger Things",
+        "The Crown", "The Simpsons", "The Walking Dead", "Lost", "House of Cards",
+        "Parks and Recreation", "How I Met Your Mother", "Westworld", "Sherlock", "The Mandalorian",
+        "Brooklyn Nine-Nine", "Better Call Saul", "Rick and Morty", "Grey's Anatomy", "Narcos"
+    ],
+
+    "Locations": [
+        "Beach", "Mountain", "Hospital", "Airport", "School",
+        "Library", "Restaurant", "Mall", "Park", "Hotel",
+        "Train Station", "Zoo", "Museum", "Stadium", "Farm",
+        "Bridge", "Castle", "Forest", "Aquarium", "Cinema"
+    ],
+
+    "Objects": [
+        "Chair", "Laptop", "Phone", "Backpack", "Bottle",
+        "Clock", "Pillow", "Scissors", "Umbrella", "Flashlight",
+        "Glasses", "Wallet", "Keys", "Headphones", "Pen",
+        "Remote", "Mirror", "Shoes", "Blanket", "Candle"
+    ]
 }
 
 # Game state storage
