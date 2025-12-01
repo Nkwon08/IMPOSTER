@@ -7,12 +7,24 @@ export function useWebSocket(roomCode, onMessage) {
   useEffect(() => {
     if (!roomCode) return
 
-    // Use ws://localhost:8000 in development (bypassing Vite proxy for WebSockets)
-    // In production, use the same host as the page
+    // Use environment variable for API URL in production, or localhost in development
+    const apiUrl = import.meta.env.VITE_API_URL || ''
     const isDev = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
-    const protocol = isDev ? 'ws:' : (window.location.protocol === 'https:' ? 'wss:' : 'ws:')
-    const host = isDev ? 'localhost:8000' : window.location.host
-    const wsUrl = `${protocol}//${host}/ws/${roomCode}`
+    
+    let wsUrl
+    if (isDev) {
+      // Development: use localhost
+      wsUrl = `ws://localhost:8000/ws/${roomCode}`
+    } else if (apiUrl) {
+      // Production with custom API URL
+      const wsProtocol = apiUrl.startsWith('https') ? 'wss:' : 'ws:'
+      const wsHost = apiUrl.replace(/^https?:\/\//, '').replace(/\/$/, '')
+      wsUrl = `${wsProtocol}//${wsHost}/ws/${roomCode}`
+    } else {
+      // Production: use same host as frontend
+      const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:'
+      wsUrl = `${protocol}//${window.location.host}/ws/${roomCode}`
+    }
     
     const ws = new WebSocket(wsUrl)
     wsRef.current = ws
