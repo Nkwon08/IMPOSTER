@@ -96,12 +96,37 @@ export default function Lobby() {
     alert('Invite link copied!')
   }
 
+  const handleBack = () => {
+    navigate('/')
+  }
+
   if (!roomCode) {
     return <div className="container">Loading...</div>
   }
 
   return (
-    <div className="container">
+    <div className="container" style={{ position: 'relative' }}>
+      <button
+        onClick={handleBack}
+        className="button"
+        style={{
+          position: 'absolute',
+          top: '24px',
+          left: '24px',
+          background: 'var(--md-surface-variant)',
+          border: '1px solid rgba(255, 255, 255, 0.12)',
+          color: 'var(--text-secondary)',
+          boxShadow: 'none',
+          fontSize: '0.9rem',
+          padding: '10px 20px',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '8px',
+          zIndex: 10,
+        }}
+      >
+        ← Back
+      </button>
       <h2>🎮 Game Lobby</h2>
       <div className="room-code">{roomCode}</div>
 
