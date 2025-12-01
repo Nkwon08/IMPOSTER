@@ -664,13 +664,8 @@ h3 {
   color: var(--md-primary);
   margin: 40px 0;
   letter-spacing: -0.02em;
-  animation: revealWord 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
-  text-shadow: 0 2px 8px rgba(187, 134, 252, 0);
-}
-
-/* Glow appears after 300ms */
-.word-display {
   animation: revealWord 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), revealGlow 0.5s ease-out 0.3s both;
+  text-shadow: 0 2px 8px rgba(187, 134, 252, 0);
 }
 
 .imposter-display {
