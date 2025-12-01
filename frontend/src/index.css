@@ -706,6 +706,44 @@ h3 {
   }
 }
 
+/* Imposter GIF container */
+.imposter-gif-container {
+  margin: 20px 0 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 0.8s ease-out;
+}
+
+.imposter-gif {
+  max-width: 300px;
+  max-height: 300px;
+  width: auto;
+  height: auto;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(207, 102, 121, 0.4);
+  border: 2px solid rgba(207, 102, 121, 0.3);
+  animation: imposterGifPulse 3s ease-in-out infinite;
+}
+
+@keyframes imposterGifPulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 8px 32px rgba(207, 102, 121, 0.4);
+  }
+  50% {
+    transform: scale(1.02);
+    box-shadow: 0 12px 40px rgba(207, 102, 121, 0.6);
+  }
+}
+
+@media (max-width: 768px) {
+  .imposter-gif {
+    max-width: 250px;
+    max-height: 250px;
+  }
+}
+
 .category-display {
   font-size: 1.5rem;
   color: var(--text-secondary);
