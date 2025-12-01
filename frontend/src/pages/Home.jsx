@@ -26,21 +26,36 @@ export default function Home() {
 
     setIsCreating(true)
     try {
-      const res = await fetch(getApiUrl('/api/create_room'), {
+      const apiUrl = getApiUrl('/api/create_room')
+      console.log('Creating game with API URL:', apiUrl)
+      
+      const res = await fetch(apiUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({}),
       })
 
-      const data = await res.json()
-      if (res.ok) {
-        navigate(`/lobby?roomCode=${data.roomCode}&hostId=${data.hostId}&playerName=${encodeURIComponent(playerName)}&playerId=${data.hostId}`)
-      } else {
-        alert('Failed to create game: ' + (data.detail || data.error || JSON.stringify(data)))
+      if (!res.ok) {
+        const errorText = await res.text()
+        console.error('API Error Response:', errorText)
+        let errorData
+        try {
+          errorData = JSON.parse(errorText)
+        } catch {
+          errorData = { detail: errorText }
+        }
+        alert('Failed to create game: ' + (errorData.detail || errorData.error || errorText))
+        return
       }
+
+      const data = await res.json()
+      navigate(`/lobby?roomCode=${data.roomCode}&hostId=${data.hostId}&playerName=${encodeURIComponent(playerName)}&playerId=${data.hostId}`)
     } catch (error) {
       console.error('Error creating game:', error)
-      alert('Error creating game: ' + error.message + '. Check console for details.')
+      const apiUrl = getApiUrl('/api/create_room')
+      console.error('API URL attempted:', apiUrl)
+      console.error('VITE_API_URL env var:', import.meta.env.VITE_API_URL)
+      alert(`Error creating game: ${error.message}\n\nCheck:\n1. Backend is running\n2. VITE_API_URL is set correctly\n3. Backend URL is accessible\n\nSee console for details.`)
     } finally {
       setIsCreating(false)
     }
