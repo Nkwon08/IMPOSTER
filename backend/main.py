@@ -31,6 +31,15 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+@app.get("/")
+async def root():
+    """Root endpoint - confirms API is running"""
+    return {
+        "message": "Imposter Game API is running!",
+        "docs": "/docs",
+        "status": "ok"
+    }
+
 # Word lists by category
 WORD_LISTS = {
     "Animals": ["Elephant", "Giraffe", "Penguin", "Dolphin", "Tiger", "Lion", "Bear", "Monkey", "Zebra", "Kangaroo"],
