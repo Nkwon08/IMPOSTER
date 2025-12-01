@@ -111,8 +111,8 @@ export default function Lobby() {
         className="button"
         style={{
           position: 'absolute',
-          top: '24px',
-          left: '24px',
+          top: '16px',
+          left: '16px',
           background: 'var(--md-surface-variant)',
           border: '1px solid rgba(255, 255, 255, 0.12)',
           color: 'var(--text-secondary)',
@@ -121,8 +121,12 @@ export default function Lobby() {
           padding: '10px 20px',
           display: 'flex',
           alignItems: 'center',
+          justifyContent: 'center',
           gap: '8px',
           zIndex: 10,
+          width: 'auto',
+          margin: 0,
+          minWidth: 'auto',
         }}
       >
         ← Back
