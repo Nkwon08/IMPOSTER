@@ -64,6 +64,7 @@ export default function Voting() {
     if (message.type === 'room_update') {
       const otherPlayers = (message.data.players || []).filter((p) => p.id !== playerId)
       setPlayers(otherPlayers)
+      // Automatically navigate to results when status changes to 'results'
       if (message.data.status === 'results') {
         navigate(`/results?roomCode=${roomCode}&playerId=${playerId}&playerName=${encodeURIComponent(playerName || '')}&hostId=${hostId || ''}`)
       }
@@ -90,7 +91,8 @@ export default function Voting() {
       const data = await res.json()
       if (res.ok) {
         setHasVoted(true)
-        if (data.allVoted) {
+        // If all votes are in, navigate immediately (WebSocket will also trigger this)
+        if (data.allVoted || data.status === 'results') {
           navigate(`/results?roomCode=${roomCode}&playerId=${playerId}&playerName=${encodeURIComponent(playerName || '')}&hostId=${hostId || ''}`)
         }
       } else {
@@ -134,7 +136,6 @@ export default function Voting() {
 
       <h2>🗳️ Voting</h2>
       <p style={{ textAlign: 'center', color: '#6b7280', marginBottom: '32px', fontSize: '1.1rem', fontWeight: '500' }}>
-        Choose who you think is the imposter
       </p>
 
       {!hasVoted ? (

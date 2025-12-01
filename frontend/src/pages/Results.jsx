@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
+import { useWebSocket } from '../hooks/useWebSocket'
 import { getApiUrl } from '../utils/config'
 
 export default function Results() {
@@ -15,6 +16,18 @@ export default function Results() {
     if (!roomCode) return
     fetchResults()
   }, [roomCode])
+
+  const handleWebSocketMessage = (message) => {
+    if (message.type === 'room_update') {
+      // Update room state when results are broadcasted
+      if (message.data.status === 'results') {
+        setRoomState(message.data)
+        setIsLoading(false)
+      }
+    }
+  }
+
+  useWebSocket(roomCode, handleWebSocketMessage)
 
   const fetchResults = async () => {
     try {
