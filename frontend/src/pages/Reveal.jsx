@@ -72,37 +72,14 @@ export default function Reveal() {
       })
 
       const data = await res.json()
-      // WebSocket will handle status updates
+      // Automatically navigate to voting page after marking as revealed
+      navigate(`/voting?roomCode=${roomCode}&playerId=${playerId}&playerName=${encodeURIComponent(playerName || '')}&hostId=${hostId || ''}&role=${encodeURIComponent(role || '')}&word=${encodeURIComponent(word || '')}&category=${encodeURIComponent(category || '')}`)
     } catch (error) {
       console.error('Error marking revealed:', error)
-    } finally {
       setIsMarkingRevealed(false)
     }
   }
 
-  const handleStartVoting = async () => {
-    if (!roomCode || !hostId) return
-
-    try {
-      const res = await fetch(getApiUrl('/api/start_voting'), {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          roomCode,
-          hostId,
-        }),
-      })
-
-      const data = await res.json()
-      if (res.ok) {
-        navigate(`/voting?roomCode=${roomCode}&playerId=${playerId}&playerName=${encodeURIComponent(playerName || '')}&hostId=${hostId}`)
-      } else {
-        alert('Failed to start voting: ' + (data.detail || data.error))
-      }
-    } catch (error) {
-      alert('Error starting voting')
-    }
-  }
 
   if (isLoading) {
     return (
@@ -111,8 +88,6 @@ export default function Reveal() {
       </div>
     )
   }
-
-  const isHostUser = hostId === playerId
 
   return (
     <div className="container">
@@ -164,16 +139,6 @@ export default function Reveal() {
           )}
         </button>
 
-        {isHostUser && (
-          <div style={{ marginTop: '40px', paddingTop: '32px', borderTop: '1px solid rgba(255, 255, 255, 0.12)' }}>
-            <p className="waiting-message">
-              Once all players have confirmed, you can start voting.
-            </p>
-            <button onClick={handleStartVoting} className="button" style={{ marginTop: '16px' }}>
-              🗳️ Start Voting
-            </button>
-          </div>
-        )}
       </div>
     </div>
   )

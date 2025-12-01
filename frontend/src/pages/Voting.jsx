@@ -11,6 +11,11 @@ export default function Voting() {
   const playerName = searchParams.get('playerName')
   const hostId = searchParams.get('hostId')
 
+  // Get role/word from URL params (passed from Reveal page) or fetch from API
+  const [role, setRole] = useState(searchParams.get('role') || null)
+  const [word, setWord] = useState(searchParams.get('word') || null)
+  const [category, setCategory] = useState(searchParams.get('category') || null)
+
   const [players, setPlayers] = useState([])
   const [selectedPlayerId, setSelectedPlayerId] = useState(null)
   const [hasVoted, setHasVoted] = useState(false)
@@ -19,7 +24,25 @@ export default function Voting() {
   useEffect(() => {
     if (!roomCode) return
     fetchRoomState()
+    // If role/word not in URL params, fetch from API
+    if (!role && playerId) {
+      fetchPlayerInfo()
+    }
   }, [roomCode, playerId])
+
+  const fetchPlayerInfo = async () => {
+    try {
+      const res = await fetch(getApiUrl(`/api/get_player_info?roomCode=${roomCode}&playerId=${playerId}`))
+      const data = await res.json()
+      if (res.ok) {
+        setRole(data.role)
+        setWord(data.word)
+        setCategory(data.category)
+      }
+    } catch (error) {
+      console.error('Error fetching player info:', error)
+    }
+  }
 
   const fetchRoomState = async () => {
     try {
@@ -86,6 +109,29 @@ export default function Voting() {
 
   return (
     <div className="container">
+      {/* Reminder badge in corner */}
+      {role && (
+        <div className="voting-reminder">
+          {role === 'crew' ? (
+            <>
+              <div style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: '4px' }}>Your Word</div>
+              <div style={{ fontSize: '1.1rem', fontWeight: '700', color: 'var(--md-primary)' }}>{word}</div>
+              {category && (
+                <div style={{ fontSize: '0.75rem', color: 'var(--text-hint)', marginTop: '4px' }}>📂 {category}</div>
+              )}
+            </>
+          ) : (
+            <>
+              <div style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: '4px' }}>Your Role</div>
+              <div style={{ fontSize: '1.1rem', fontWeight: '700', color: 'var(--md-error)' }}>🎭 IMPOSTER</div>
+              {category && (
+                <div style={{ fontSize: '0.75rem', color: 'var(--text-hint)', marginTop: '4px' }}>📂 {category}</div>
+              )}
+            </>
+          )}
+        </div>
+      )}
+
       <h2>🗳️ Voting</h2>
       <p style={{ textAlign: 'center', color: '#6b7280', marginBottom: '32px', fontSize: '1.1rem', fontWeight: '500' }}>
         Choose who you think is the imposter

@@ -334,6 +334,11 @@ async def mark_revealed(data: dict):
     
     all_revealed = all(p.has_revealed for p in room.players)
     
+    # Automatically transition to voting when all players have revealed
+    if all_revealed and room.status == "reveal":
+        room.status = "voting"
+        room.votes = {}
+    
     # Broadcast update
     await broadcast_to_room(room_code, {
         "type": "room_update",
