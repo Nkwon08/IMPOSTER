@@ -105,6 +105,8 @@ export default function Reveal() {
 
         {role === 'imposter' && (
           <>
+            <h2>You are the</h2>
+            <div className="imposter-display">🎭 IMPOSTER</div>
             <div className="imposter-gif-container">
               <img 
                 src="/imposter.gif" 
@@ -112,8 +114,6 @@ export default function Reveal() {
                 className="imposter-gif"
               />
             </div>
-            <h2>You are the</h2>
-            <div className="imposter-display">🎭 IMPOSTER</div>
             <div className="category-display">📂 {category}</div>
             <p style={{ 
               marginTop: '32px', 
